@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightgray;
+        }
+
+        form {
+            background-color: white;
+            width: 300px;
+            padding: 20px;
+            margin: 50px auto;
+            border: 1px solid gray;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+
+    <h1><b>Sign Up Form</b></h1>
+
+    <form action="" id="signupform">
+
+        <label for="">Enter Name</label><br>
+        <input type="text" id="name" placeholder="Enter Your Name"><br>
+
+        <label for="">Enter Email</label><br>
+        <input type="text" id="email" placeholder="Enter Email"><br>
+
+        <label for="">Enter Password</label><br>
+        <input type="text" id="password" placeholder="Enter Password"><br>
+
+        <label for="">Confirm Password</label><br>
+        <input type="text" id="cpassword" placeholder="Confirm Password"><br>
+
+        <button type="submit">Signup</button>
+
+    </form>
+
+    <script>
+        $(document).ready(function () {
+
+            function checkname() {
+                var namevalue = $("#name").val();
+                var nameregexp = /^[A-Z][a-zA-Z0-9]{5,10}$/;
+                if (!nameregexp.test(namevalue)) {
+                    alert("Please enter a valid name (6–11 characters, starting with a capital letter).")
+                    return false
+                }
+                return true
+            }
+
+            function checkemail() {
+                var emailvalue = $("#email").val();
+                var emailregexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailregexp.test(emailvalue)) {
+                    alert("Please enter a valid email address.")
+                    return false
+                }
+                return true
+            }
+
+            function checkpassword() {
+                var passwordvalue = $("#password").val();
+                var cpassword = $("#cpassword").val();
+                var passwordregexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*[A-Za-z0-9]).{8,}$/;
+
+                if (!passwordregexp.test(passwordvalue)) {
+                    alert("Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a number.")
+                    return false
+                }
+
+                if (cpassword != passwordvalue) {
+                    alert("Passwords do not match. Please try again.")
+                    return false
+                }
+                return true
+            }
+
+            $("#signupform").submit(function (e) {
+                e.preventDefault()
+
+                if (checkname() && checkemail() && checkpassword()) {
+                    alert("Registration completed successfully!")
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
